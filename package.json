@@ -1,0 +1,27 @@
+{
+  "name": "vito",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "dev:force": "vite --force",
+    "build": "vite build",
+    "build:tsc": "vue-tsc --noEmit && vite build --emptyOutDir",
+    "build:debug": "vue-tsc --noEmit && vite build --debug",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.21"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/eslint-config-typescript": "^9.0.1",
+    "eslint": "^8.2.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "typescript": "^4.4.4",
+    "vite": "^2.6.4",
+    "vue-tsc": "^0.29.4"
+  }
+}
