@@ -1,4 +1,4 @@
-import { reactive, toRefs, readonly } from "vue";
+import { reactive, readonly } from 'vue';
 import { User } from '../models';
 
 interface stateModel {
@@ -19,25 +19,27 @@ const state = reactive<stateModel>({
 });
 
 const addUser = async (user: User) : Promise<void> => {
-   return new Promise<void>((resolve, reject) => {
+   return new Promise<void>((resolve) => {
       state.users.push(user);
       resolve();
    });
 };
 
 const fetchUsers = async () => {
-   debugger;
-   return new Promise<void>((resolve, reject) => {
-      state.users = users;
-      debugger;
-      resolve();
+   state.loading = true;
+   return new Promise<void>((resolve) => {
+      window.setTimeout(() => {
+         state.users = users;
+         state.loading = false;
+         resolve();
+       }, 1000);
    });
 };
 
-export default function useUsers() {
-   return {
-      state: readonly(state),
-      fetchUsers
-   }
-};
+const useUsers = () => ({
+   state: readonly(state),
+   fetchUsers,
+   addUser,
+});
 
+export default useUsers;

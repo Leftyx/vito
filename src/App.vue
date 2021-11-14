@@ -1,6 +1,6 @@
 <template>
   <my-component :message="title" />
-  <other-component  />
+  <other-component />
 </template>
 
 <script src="./App.ts" lang="ts" />

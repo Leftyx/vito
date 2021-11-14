@@ -1,17 +1,22 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { counterStore } from '../store/counter';
+import { ref } from 'vue';
+import useUsers from '../store/users';
 
 const color = ref('red');
-const { state } = counterStore();
+const { state } = useUsers();
 
 </script>
 
 <template>
-  <button @click="color = color === 'red' ? 'green' : 'red'">
-    Color is: {{ color }}
-  </button>
-  <div>{{ state.counter }}</div>
+  {{ state.loading }}
+  <div v-if="state.loading">
+    Loading
+  </div>
+  <ul>
+    <li v-for="user in state.users" :key="user.id">
+      {{ user.firstName }}
+    </li>
+  </ul>
 </template>
 
 <style scoped>

@@ -1,43 +1,35 @@
-import { defineComponent, ref } from 'vue';
-import useTodos from '../store/users';
-import { counterStore } from '../store/counter';
+import { defineComponent, ref, toRefs } from 'vue';
+import useUsers from '../store/users';
+// import { counterStore } from '../store/counter';
 
 // type MyBoolean = true | false | 1 | 0;
 // type NonNullable<T> = T extends null | undefined ? never : T;
 
 export default defineComponent({
-   name: 'my-component',
+   name: 'MyComponent',
    components: {},
    props: {
       message: { type: String, default: '', required: false },
    },
-   setup(props, context) {
+   setup(props) {
 
-      const { state, increment } = counterStore();
+      const { state, fetchUsers } = useUsers();
 
       const theMessage = ref(props.message);
 
       const clickButton = () => {
-
          alert(`${theMessage.value}`);
       };
 
-      const doSomething = () => {
-         increment();
+      const loadUsersAsync = async () => {
+         await fetchUsers();
       };
 
-      // const loadUsers = async () => {
-      //    debugger;
-      //    await fetchUsers();
-      // };
-
       return {
-         // users: state.users,
-         state: state,
+         ...toRefs(state),
          clickButton,
-         // loadUsers,
-         doSomething,
-      }
+         loadUsersAsync,
+      };
    },
 });
 
