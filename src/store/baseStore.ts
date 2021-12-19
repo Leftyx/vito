@@ -1,12 +1,18 @@
 import { DeepReadonly, reactive, readonly, ToRefs, toRefs, } from 'vue';
 
-class VTStore<T extends object> {
+class StoreEntity extends Object {
+
+}
+
+
+class VTStore<T extends StoreEntity> {
    private underlying: T;
 
    constructor(initial: T) {
       this.underlying = reactive(initial) as T;
    }
 
+   
    public mutate<K extends keyof T>(key: K, val: T[K]): void {
       this.underlying[key] = val;
    }

@@ -1,8 +1,9 @@
 import { reactive, readonly } from 'vue';
-import { User } from '../models';
+import { User, ExternalUser } from '../models';
 
 interface stateModel {
    users: User[];
+   externalUsers: ExternalUser[];
    loading: boolean;
 }
 
@@ -15,6 +16,7 @@ const users: User[] = [
 
 const state = reactive<stateModel>({
     users: [],
+    externalUsers: [],
     loading: false,
 });
 
@@ -36,10 +38,29 @@ const fetchUsers = async () => {
    });
 };
 
+const fetchExternalUsers = async () : Promise<void> => {
+   state.loading = true;
+   return fetch('/api/users')
+   .then((response: Response) => {
+      if (response.status === 404) {
+         throw new Error('Not Found');
+      }
+      return response.json();
+   })
+   .then((payload: ExternalUser[]) => {
+      state.externalUsers = payload;
+      state.loading = false;
+      return;
+   }).catch((reason) => {
+      console.log('Failed: ', reason);
+   });
+};
+
 const useUsers = () => ({
    state: readonly(state),
    fetchUsers,
    addUser,
+   fetchExternalUsers,
 });
 
 export default useUsers;

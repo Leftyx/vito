@@ -7,11 +7,19 @@
       </li>
     </ul>
     <br />
-    <button type="button" @click="clickButton()">
+    <ul>
+      <li v-for="user in externalUsers" :key="user.id">
+        {{ user.name }}
+      </li>
+    </ul>
+    <!-- <button type="button" @click="clickButton()">
       Click Me
-    </button>
+    </button> -->
     <button type="button" @click="loadUsersAsync()">
       Load Users
+    </button>
+    <button type="button" @click="loadExternalUsersAsync()">
+      Load External Users
     </button>
   </div>
 </template>
