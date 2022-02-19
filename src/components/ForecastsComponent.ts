@@ -11,7 +11,7 @@ export default defineComponent({
 
       const theMessage = ref(props.message);
 
-      const { state, fetchForecasts, fetchProxyForecasts } = useForecasts();
+      const { state, fetchProxyForecasts } = useForecasts();
 
       const loadForecastsAsync = async () => {
          // await fetchForecasts();
